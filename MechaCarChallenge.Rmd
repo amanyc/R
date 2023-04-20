@@ -1,0 +1,42 @@
+---
+title: "MechaCarChallenge"
+output: html_document
+date: "2023-02-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+mecha_cars <- read.csv('MechaCar_mpg.csv',stringsAsFactors = F) #read in dataset
+```
+
+```{r}
+lm(mpg~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data=mecha_cars)  #generate multiple linear regression model
+```
+
+```{r}
+summary(lm(mpg~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data=mecha_cars))  #generate summary for multiple linear regression model
+```
+```{r}
+suspension_coil <- read.csv('Suspension_Coil.csv',stringsAsFactors = F) #read in dataset
+
+```
+```{r}
+total_summary <- suspension_coil %>% summarize(Mean = mean(PSI), Median = median(PSI), Variance = var(PSI), SD = sd(PSI))
+
+```
+
+```{r}
+lot_summary <- suspension_coil %>% group_by(Manufacturing_Lot) %>% summarize(Mean = mean(PSI), Median = median(PSI), Variance = var(PSI), SD = sd(PSI), .groups = 'keep')
+
+```
+
+```{r}
+t.test(suspension_coil$PSI), mu=mean(suspension_coil$PSI))```
+
